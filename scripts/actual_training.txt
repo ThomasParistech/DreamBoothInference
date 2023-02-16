@@ -1,0 +1,49 @@
+best_steps = 2600
+
+
+
+num_class_images=300
+lr_warmup_steps=140
+max_train_steps=best_steps
+
+save_min_steps = 0
+save_interval = 10000
+n_save_sample = 2
+save_sample_prompt = "\"photo of hamr woman in the twenties, black and white\""
+save_second_sample_prompt = "\"photo of hamr woman\""
+save_sample_negative_prompt = "\"piercing,tatoo,glasses,3d, game, out of frame, lowres, text, error, cropped, worst quality, " \
+    "low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, out of frame, extra fingers, mutated hands, " \
+    "poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, " \
+    "extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, " \
+    "extra arms, extra legs, fused fingers, too many fingers, long neck, username, watermark, signature\"" \
+
+!accelerate launch train_dreambooth.py \
+  --pretrained_model_name_or_path=$MODEL_NAME \
+  --pretrained_vae_name_or_path="stabilityai/sd-vae-ft-mse" \
+  --output_dir=$OUTPUT_DIR \
+  --revision="fp16" \
+  --with_prior_preservation --prior_loss_weight=1.0 \
+  --seed=1337 \
+  --resolution=512 \
+  --train_batch_size=1 \
+  --train_text_encoder \
+  --mixed_precision="fp16" \
+  --use_8bit_adam \
+  --gradient_accumulation_steps=1 \
+  --learning_rate=1e-6 \
+  --lr_scheduler="constant" \
+  --lr_warmup_steps=$lr_warmup_steps \
+  --num_class_images=$num_class_images \
+  --sample_batch_size=4 \
+  --max_train_steps=$max_train_steps \
+  --save_interval=$save_interval \
+  --save_min_steps=$save_min_steps \
+  --n_save_sample=$n_save_sample \
+  --save_sample_prompt=$save_sample_prompt \
+  --save_second_sample_prompt=$save_second_sample_prompt \
+  --save_sample_negative_prompt=$save_sample_negative_prompt \
+  --concepts_list="concepts_list.json"
+
+
+# Reduce the `--save_interval` to lower than `--max_train_steps` to save weights from intermediate steps.
+# `--save_sample_prompt` can be same as `--instance_prompt` to generate intermediate samples (saved along with weights in samples directory).

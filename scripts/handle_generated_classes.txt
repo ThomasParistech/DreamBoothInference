@@ -1,0 +1,13 @@
+instance_name = "woman"
+
+
+local_colab = f"/content/data/{instance_name}"
+remote_drive = f"/content/drive/MyDrive/stable_diffusion_weights/instances/{instance_name}"
+
+# # Dump to GDrive 
+# local_colab_files = local_colab+"/*.jpg"
+# !cp $local_colab_files $remote_drive
+
+# # Load cache from Gdrive
+# remote_drive_files = remote_drive+"/*.jpg"
+# !cp $remote_drive_files local_colab

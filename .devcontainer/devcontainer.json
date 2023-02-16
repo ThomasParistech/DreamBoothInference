@@ -1,0 +1,25 @@
+{
+    "name": "Existing Dockerfile",
+    "context": "..",
+    "dockerFile": "Dockerfile",
+    "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "seatonjiang.gitmoji-vscode",
+        "eamodio.gitlens"
+    ],
+    "runArgs": [
+        "--gpus",
+        "all",
+        "--net=host",
+        "-e",
+        "DISPLAY",
+        "--cap-add",
+        "SYS_PTRACE",
+        "-v",
+        "${localEnv:HOME}/.Xauthority:/root/.Xauthority",
+        "-v",
+        "${localEnv:HOME}/.huggingface/token:/home/dock/.huggingface/token"
+    ],
+    "remoteUser": "dock"
+}
