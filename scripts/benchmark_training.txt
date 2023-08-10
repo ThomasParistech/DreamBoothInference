@@ -1,12 +1,12 @@
 num_class_images=300
-lr_warmup_steps=140
-max_train_steps=4000
+lr_warmup_steps=60
+max_train_steps=2000
 
-save_min_steps = 2000
-save_interval = 200
-n_save_sample = 2
-save_sample_prompt = "\"photo of hamr woman in the twenties, black and white\""
-save_second_sample_prompt = "\"photo of hamr woman\""
+save_min_steps = 500
+save_interval = 50
+n_save_sample = 3
+save_sample_prompt = "\"photo of onex man\""
+save_second_sample_prompt = "\"photo of onex man by Tomer Hanuka\""
 save_sample_negative_prompt = "\"piercing,tatoo,glasses,3d, game, out of frame, lowres, text, error, cropped, worst quality, " \
     "low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, out of frame, extra fingers, mutated hands, " \
     "poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, " \
@@ -19,7 +19,7 @@ save_sample_negative_prompt = "\"piercing,tatoo,glasses,3d, game, out of frame, 
   --output_dir=$OUTPUT_DIR \
   --revision="fp16" \
   --with_prior_preservation --prior_loss_weight=1.0 \
-  --seed=1337 \
+  --seed=53332 \
   --resolution=512 \
   --train_batch_size=1 \
   --train_text_encoder \

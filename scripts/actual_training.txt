@@ -1,9 +1,9 @@
-best_steps = 2600
+best_steps = 960
 
 
 
-num_class_images=300
-lr_warmup_steps=140
+num_class_images=144
+lr_warmup_steps=96
 max_train_steps=best_steps
 
 save_min_steps = 0

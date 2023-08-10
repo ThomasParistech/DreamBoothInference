@@ -1,11 +1,11 @@
 import hashlib
 import os
-from typing import Optional
+from typing import Optional, Tuple
 
 from dream_booth_inference import WEIGHTS_DIR
 
 
-def get_weights(person_name: str, num_steps: Optional[int] = None) -> str:
+def get_weights(person_name: str, num_steps: Optional[int] = None) -> Tuple[str, int]:
     """aaaa"""
     person_dir = os.path.join(WEIGHTS_DIR, person_name)
     if num_steps is None:
@@ -13,7 +13,7 @@ def get_weights(person_name: str, num_steps: Optional[int] = None) -> str:
 
     person_weights = os.path.join(person_dir, str(num_steps))
     assert os.path.isdir(person_weights)
-    return person_weights
+    return person_weights, num_steps
 
 
 def hash_prompt(positive_prompt: str, negative_prompt: str) -> str:

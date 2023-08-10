@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.3
 
 # Other version not tested yet
-ARG CUDA_VERSION=11.3.0
+ARG CUDA_VERSION=11.4
 ARG UBUNTU_VERSION=20.04
 
 FROM nvidia/cuda:${CUDA_VERSION}-devel-ubuntu${UBUNTU_VERSION}
@@ -112,11 +112,16 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 RUN --mount=type=cache,target=/root/.cache/pip \
     FORCE_CUDA=1 \
     TORCH_CUDA_ARCH_LIST=8.6 \
-    XFORMERS_DISABLE_FLASH_ATTN=1 \
     pip install \
     -v -U git+https://github.com/facebookresearch/xformers.git@main#egg=xformers
 # Consider loading wheels instead of recompiling xformers
 # https://github.com/facebookresearch/xformers/actions/runs/3543179717/jobs/5949406524
+
+
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install \
+    scipy safetensors opencv-python
+
 
 #-------------------------------------------------------------
 #       Utils
